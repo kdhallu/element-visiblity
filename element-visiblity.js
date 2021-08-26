@@ -3,17 +3,16 @@
  *                              element-visiblity.js                                                     *
  *                                                                                              *
  ************************************************************************************************/
-window.elementVisibility = ($adElement) => {
+window.elementVisibility = ($element) => {
   /**
-   * Constants whose re-calculation is not required
+   * Constants
    */
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
-  const adElementHeight = $adElement.offsetHeight;
-  const adElementWidth = $adElement.offsetWidth;
-  const adPositionFromTop = $adElement.offsetTop;
-  const adPositionFromLeft = $adElement.offsetLeft;
-
+  const elementHeight = $element.offsetHeight;
+  const elementWidth = $element.offsetWidth;
+  const elementPositionFromTop = $element.offsetTop;
+  const elementPositionFromLeft = $element.offsetLeft;
 
   /**
    * Calculate x-axis visibility
@@ -21,20 +20,20 @@ window.elementVisibility = ($adElement) => {
   const calculateYAxisVisibility = () => {
     let percentage;
     const scrollTop = document.documentElement.scrollTop;
-    const hiddenBefore = scrollTop - adPositionFromTop;
-    const hiddenAfter = (adPositionFromTop + adElementHeight) - (scrollTop + windowHeight);
+    const hiddenBefore = scrollTop - elementPositionFromTop;
+    const hiddenAfter = (elementPositionFromTop + elementHeight) - (scrollTop + windowHeight);
 
-    if ((scrollTop > adPositionFromTop + adElementHeight) || (adPositionFromTop > scrollTop + windowHeight)) {
+    if ((scrollTop > elementPositionFromTop + elementHeight) || (elementPositionFromTop > scrollTop + windowHeight)) {
       percentage = 0;
     } else {
       percentage = 100;
 
       if (hiddenBefore > 0) {
-        percentage -= (hiddenBefore * 100) / adElementHeight;
+        percentage -= (hiddenBefore * 100) / elementHeight;
       }
 
       if (hiddenAfter > 0) {
-        percentage -= (hiddenAfter * 100) / adElementHeight;
+        percentage -= (hiddenAfter * 100) / elementHeight;
       }
     }
     return percentage;
@@ -46,20 +45,20 @@ window.elementVisibility = ($adElement) => {
   const calculateXAxisVisibility = () => {
     let percentage;
     const scrollLeft = document.documentElement.scrollLeft;
-    const hiddenBefore = scrollLeft - adPositionFromLeft;
-    const hiddenAfter = (adPositionFromLeft + adElementWidth) - (scrollLeft + windowWidth);
+    const hiddenBefore = scrollLeft - elementPositionFromLeft;
+    const hiddenAfter = (elementPositionFromLeft + elementWidth) - (scrollLeft + windowWidth);
 
-    if ((scrollLeft > adPositionFromLeft + adElementWidth) || (scrollLeft > adPositionFromLeft + adElementWidth)) {
+    if ((scrollLeft > elementPositionFromLeft + elementWidth) || (elementPositionFromLeft > scrollLeft + windowWidth)) {
       percentage = 0;
     } else {
       percentage = 100;
 
       if (hiddenBefore > 0) {
-        percentage -= (hiddenBefore * 100) / adElementWidth;
+        percentage -= (hiddenBefore * 100) / elementWidth;
       }
 
       if (hiddenAfter > 0) {
-        percentage -= (hiddenAfter * 100) / adElementWidth;
+        percentage -= (hiddenAfter * 100) / elementWidth;
       }
     }
 
